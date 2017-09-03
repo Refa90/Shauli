@@ -151,7 +151,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BlogController.cs" />
-    <Compile Include="Controllers\FansClub2Controller.cs" />
     <Compile Include="Controllers\FansClubController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -207,12 +206,11 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Blog\index.cshtml" />
-    <Content Include="Views\FansClub\index.cshtml" />
-    <Content Include="Views\FansClub2\Create.cshtml" />
-    <Content Include="Views\FansClub2\Delete.cshtml" />
-    <Content Include="Views\FansClub2\Details.cshtml" />
-    <Content Include="Views\FansClub2\Edit.cshtml" />
-    <Content Include="Views\FansClub2\Index.cshtml" />
+    <Content Include="Views\FansClub\Create.cshtml" />
+    <Content Include="Views\FansClub\Delete.cshtml" />
+    <Content Include="Views\FansClub\Details.cshtml" />
+    <Content Include="Views\FansClub\Edit.cshtml" />
+    <Content Include="Views\FansClub\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

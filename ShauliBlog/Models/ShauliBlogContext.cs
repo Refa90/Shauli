@@ -19,6 +19,6 @@ namespace ShauliBlog.Models
         {
         }
 
-        public System.Data.Entity.DbSet<ShauliBlog.Models.Fan> Fans { get; set; }
+        public DbSet<Fan> Fans { get; set; }
     }
 }

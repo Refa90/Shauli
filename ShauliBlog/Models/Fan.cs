@@ -10,11 +10,10 @@ namespace ShauliBlog.Models
     public class Fan
     {
         [Key]
-        [Column(Order = 1)]
+        public int Id { get; set; }
+                
         public String FirstName { get; set; }
-
-        [Key]
-        [Column(Order = 2)]
+               
         public String LastName { get; set; }
 
         public bool Gender { get; set; }
