@@ -151,30 +151,35 @@ nav {
 ------------------------------*/
 
 #content {
-		display: table;
-	    
-
+    display: table;
+    
 }
-	#search {
-		display: table-cell-group;
-		padding-right: 22px;
-	}
 
-	#mainContent {
-		display: table-cell-group;
-		width: 620px;
-		padding-right: 22px;
-	}
-	
-	aside {
-		display: table-cell;
-		width: 300px;
-		/*background: url("images/sidebar_background.png") top left;*/
-		background: -webkit-linear-gradient(right, rgba(255,255,255,0), #e3e3e3); /* For Safari 5.1 to 6.0 */
-		background: -o-linear-gradient(left, rgba(255,255,255,0), #e3e3e3); /* For Opera 11.1 to 12.0 */
-		background: -moz-linear-gradient(left, rgba(255,255,255,0), #e3e3e3); /* For Firefox 3.6 to 15 */
-		background: linear-gradient(to left, rgba(255,255,255,0), #e3e3e3); /* Standard syntax (must be last) */
-	}
+#search {
+    display: table-cell;
+    padding-right: 22px;
+    
+}
+
+#mainContent {
+    display: table-cell;
+    width: 620px;
+    padding-right: 22px;
+    
+}
+
+aside {
+    display: table-cell;
+    width: 300px;
+   
+    /*background: url("images/sidebar_background.png") top left;*/
+    background: -webkit-linear-gradient(right, rgba(255,255,255,0), #e3e3e3); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(left, rgba(255,255,255,0), #e3e3e3); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(left, rgba(255,255,255,0), #e3e3e3); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to left, rgba(255,255,255,0), #e3e3e3); /* Standard syntax (must be last) */
+}
+
+
 
 
 /*------------------------------
