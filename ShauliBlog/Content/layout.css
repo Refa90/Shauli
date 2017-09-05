@@ -399,16 +399,16 @@ footer {
 }
 
 body{
-	font-family: customFont;
+	font-family: myFont;
 }
 
 audio { 
    display:none;
 }
 
-@font-face{ 
-	font-family: customFont;
-	src: url(~/fonts/sansation_light.woff);
+@font-face {
+    font-family: myFont;
+    src: url("../fonts/sansation_light.woff");
 }
 #transDemo2 {
    margin-top: 5%;	
@@ -437,5 +437,7 @@ audio {
   -ms-transform:rotate(720deg) scale(2,2);
   transform:rotate(720deg) scale(2,2);
 }
+
+
 
 
