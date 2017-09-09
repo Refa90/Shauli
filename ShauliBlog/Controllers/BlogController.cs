@@ -13,11 +13,44 @@ namespace ShauliBlog.Controllers
         PostsController postsController = new PostsController();
         PostCommentsController postCommentsController = new PostCommentsController();
         CommentController commentController = new CommentController();
-        
+
         // GET: Blog
         public ActionResult Index()
         {
-            return View();
+            Comment comment = new Comment
+            {
+                Author = "kaki1",
+                AuthorWebsiteAddress = "https://www.kaki.com",
+                Content = "this is the content of the comment",
+                Headline = "this is the headline of the comment"
+            };
+
+            Post post = new Post
+            {
+                Author = "Or Yanovsky",
+                AuthorWebsiteAddress = "https://www.kaki.com",
+                Comments = new List<Comment>
+                {
+                    comment
+                },
+                PublishDate = DateTime.Now,
+                Headline = "post headline",
+                Content = "post content post conent post content",
+                Image = new byte[] { 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1 },
+                Video = new byte[] { 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1 }
+            };
+
+            post = db.Posts.Add(post);
+
+            comment.Post = post;
+            comment.PostId = post.Id;
+
+            comment = db.Comments.Add(comment);
+
+            db.SaveChanges();
+
+            List<BlogVisitorModel> model = db.Posts.Include("Comments").ToList().Select(x => new BlogVisitorModel(post)).ToList();
+            return View(model);
         }
 
         public ActionResult CreatePost(Post post)
