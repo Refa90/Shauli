@@ -7,16 +7,14 @@ using System.Web.Mvc;
 
 namespace ShauliBlog.Controllers
 {
-    public class BlogVisitorController : Controller
+    public class ManageController : Controller
     {
         private ShauliBlogContext db = new ShauliBlogContext();
 
-        // GET: BlogVisitor
+        // GET: Manage
         public ActionResult Index()
         {
-            List<BlogVisitorModel> model = db.Posts.ToList().Select(post => new BlogVisitorModel(post)).ToList();
-
-            return View(model);
+            return View(db.Posts.ToList());
         }
     }
 }
