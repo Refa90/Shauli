@@ -17,8 +17,13 @@ namespace ShauliBlog.Models
     
         public ShauliBlogContext() : base("name=ShauliBlogContext")
         {
+            Database.SetInitializer<ShauliBlogContext>(new DropCreateDatabaseAlways<ShauliBlogContext>());
         }
 
         public DbSet<Fan> Fans { get; set; }
+
+        public System.Data.Entity.DbSet<ShauliBlog.Models.Post> Posts { get; set; }
+
+        public System.Data.Entity.DbSet<ShauliBlog.Models.Comment> Comments { get; set; }
     }
 }
