@@ -1,0 +1,59 @@
+﻿@using ShauliBlog.Models;
+
+@model List<Comment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Headline
+                </th>
+                <th>
+                    Author
+                </th>
+                <th>
+                    Author Website Address
+                </th>
+                <th>
+                    Content
+                </th>
+                <th>
+                    Delete
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Comment comment in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => comment.Headline)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => comment.Author)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => comment.AuthorWebsiteAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => comment.Content)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", "Comment", new { Id = comment.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>    
+    </table>
+
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

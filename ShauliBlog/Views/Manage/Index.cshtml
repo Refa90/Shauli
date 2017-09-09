@@ -1,0 +1,52 @@
+﻿@model List<ShauliBlog.Models.Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    <h4>Manage</h4>
+    <hr />
+
+    <table>
+        <tr>
+            <th>
+                Headline
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Delete
+            </th>
+            <th>
+                Edit
+            </th>
+            <th>
+                Details
+            </th>
+            <th>
+                Manage Comments
+            </th>
+        </tr>
+        <tbody>
+            @foreach (var post in Model)
+            {
+                <tr>
+                    <td> @post.Headline</td>
+                    <td> @post.Author</td>
+                    <td> @Html.ActionLink("Delete", "Delete", "Posts", new { Id = post.Id })</td>
+                    <td> @Html.ActionLink("Edit", "Edit", "Posts", new { Id = post.Id })</td>
+                    <td> @Html.ActionLink("Details", "Details", "Posts", new { Id = post.Id })</td>
+                    <td> @Html.ActionLink("Manage Comments", "Details", "Posts", new { Id = post.Id })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Add New Post", "Create", "Posts")
+    @Html.ActionLink("Back to List", "Index")
+</p>
