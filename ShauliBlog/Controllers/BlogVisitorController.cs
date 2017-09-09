@@ -14,10 +14,8 @@ namespace ShauliBlog.Controllers
         // GET: BlogVisitor
         public ActionResult Index()
         {
-            BlogVisitorModel model = new BlogVisitorModel();
-            model.Posts = db.Posts.ToList();
-            model.NewComment = new Comment();
-
+            List<BlogVisitorModel> model = db.Posts.ToList().Select(post => new BlogVisitorModel(post)).ToList();
+       
             return View(model);
         }
     }
