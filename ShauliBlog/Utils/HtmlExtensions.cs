@@ -17,18 +17,17 @@ namespace ShauliBlog.Utils
 
         
         public static MvcHtmlString ImageFor<T, TValue>(this HtmlHelper<T> helper,
-                                           Expression<System.Func<T, TValue>> prop)
+                                           Expression<System.Func<T, TValue>> prop, object htmlAttributes = null)
         {
             ModelMetadata metadata = ModelMetadata.FromLambdaExpression(prop, helper.ViewData);
             byte[] value = (byte[])metadata.Model;
-
-
+            
             var img = string.Format("data:image/jpg:base64, {0}", Convert.ToBase64String(value));
             return new MvcHtmlString("<img src='" + img + "' />");
-        }
+        }   
 
         public static MvcHtmlString VideoFor<T, TValue>(this HtmlHelper<T> helper,
-                                           Expression<System.Func<T, TValue>> prop)
+                                           Expression<System.Func<T, TValue>> prop, object htmlAttributes = null)
         {
             ModelMetadata metadata = ModelMetadata.FromLambdaExpression(prop, helper.ViewData);
             byte[] value = (byte[])metadata.Model;
@@ -40,45 +39,19 @@ namespace ShauliBlog.Utils
             return new MvcHtmlString(dataStart + video + dataNotSupported + dataEnd);
         }
 
+        public static MvcHtmlString FileFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes)
+        {
+            var builder = new TagBuilder("input");
 
-        //<video controls = "controls" >
-        //                    < source src="~/Content/images/shauli.mp4" type="video/mp4" />
-        //                    Your browser does not support the video tag.
-        //                </video>
+            var id = helper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(ExpressionHelper.GetExpressionText(expression));
+            builder.GenerateId(id);
+            builder.MergeAttribute("name", id);
+            builder.MergeAttribute("type", "file");
 
+            builder.MergeAttributes(new RouteValueDictionary(htmlAttributes));
 
-
-        //public MvcHtmlString Video(string name, IEnumerable<sourcelistitem> sourceList, ObjectType objectType, string objectSource, object htmlAttributes)
-        //{
-        //    TagBuilder tagBuilder = new TagBuilder("video");
-        //    if (htmlAttributes != null)
-        //    {
-        //        RouteValueDictionary routeValueDictionary = new RouteValueDictionary(htmlAttributes);
-        //        tagBuilder.MergeAttributes(routeValueDictionary);
-        //    }
-
-        //    tagBuilder.MergeAttribute("id", name);
-        //    StringBuilder sourceItemBuilder = new StringBuilder();
-        //    sourceItemBuilder.AppendLine();
-        //    foreach (var sourceItem in sourceList)
-        //    {
-        //        sourceItemBuilder.AppendLine(SourceItemToSource(sourceItem));
-        //    }
-        //    sourceItemBuilder.AppendLine();
-        //    if (objectType == ObjectType.Flash)
-        //    {
-        //        sourceItemBuilder.AppendLine(CreateFlashObject
-        //        (objectSource, htmlAttributes));
-        //    }
-        //    else
-        //    {
-        //        sourceItemBuilder.AppendLine(CreateSilverlightObject(sourceList, objectSource, htmlAttributes));
-        //    }
-
-        //    tagBuilder.InnerHtml = sourceItemBuilder.ToString();
-        //    sourceItemBuilder.AppendLine();
-        //    return MvcHtmlString.Create(tagBuilder.ToString(TagRenderMode.Normal));
-        //}
-
+            // Render tag
+            return MvcHtmlString.Create(builder.ToString(TagRenderMode.SelfClosing));
+        }
     }
 }

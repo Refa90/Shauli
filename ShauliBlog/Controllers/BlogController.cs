@@ -25,7 +25,10 @@ namespace ShauliBlog.Controllers
                 Headline = "this is the headline of the comment"
             };
 
-            Post post = new Post
+
+
+
+    Post post = new Post
             {
                 Author = "Or Yanovsky",
                 AuthorWebsiteAddress = "https://www.kaki.com",
@@ -37,10 +40,11 @@ namespace ShauliBlog.Controllers
                 Headline = "post headline",
                 Content = "post content post conent post content",
                 Image = new byte[] { 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1 },
-                Video = new byte[] { 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1 }
+                Video = new byte[] { 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1 },
+                //UploadedImage = null
             };
 
-            post = db.Posts.Add(post);
+           post = db.Posts.Add(post);
 
             comment.Post = post;
             comment.PostId = post.Id;
@@ -53,9 +57,25 @@ namespace ShauliBlog.Controllers
             return View(model);
         }
 
+        public ActionResult PostsManage()
+        {
+            List<Post> posts = db.Posts.ToList();
+
+            string viewPath = "~/Views/Manage/PostManagement.cshtml";
+
+            return View(viewPath, posts);
+        }
+
+        [HttpPost]
         public ActionResult CreatePost(Post post)
         {
             return postsController.Create(post);
+        }
+
+        [HttpGet]
+        public ActionResult CreatePost()
+        {
+            return RedirectToAction("Create", "Posts");
         }
 
         public ActionResult GetPosts()

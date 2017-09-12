@@ -171,6 +171,7 @@ nav {
 aside {
     display: table-cell;
     width: 300px;
+    
    
     /*background: url("images/sidebar_background.png") top left;*/
     background: -webkit-linear-gradient(right, rgba(255,255,255,0), #e3e3e3); /* For Safari 5.1 to 6.0 */

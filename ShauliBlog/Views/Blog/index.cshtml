@@ -87,30 +87,13 @@
                 </section>
 
 
-                @*********** New Comment *********@
-                using (Ajax.BeginForm("Create", "Comment", new AjaxOptions()
-                {
-                    HttpMethod = "Post",
-                }))
-                {
-                    <h3>Post a comment</h3>
-                    <p>
-                        @Html.DisplayNameFor(model => item.NewComment.Author)
-                        @Html.TextBoxFor(model => item.NewComment.Author)
-                    </p>
-                    <p>
-                        @Html.DisplayNameFor(model => item.NewComment.AuthorWebsiteAddress)
-                        @Html.TextBoxFor(model => item.NewComment.AuthorWebsiteAddress)
-                    </p>
-                    <p>
-                        @Html.DisplayNameFor(model => item.NewComment.Content)
-                        @Html.TextBoxFor(model => item.NewComment.Content)
-                    </p>
-                    <p><input type="submit" value="Post comment" /></p>
-                }
+
+
+                @Html.Partial("~/Views/Blog/AddComment.cshtml", item.NewComment)
+
             }
 
-
+            <a href="/Posts">Manage Posts</a>
         </div>
 
     </div>

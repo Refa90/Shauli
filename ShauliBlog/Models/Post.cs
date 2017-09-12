@@ -16,5 +16,7 @@ namespace ShauliBlog.Models
         public byte[] Video { get; set; }
 
         public virtual List<Comment> Comments { get; set; }
+
+        //public HttpPostedFileBase UploadedImage { get; set; }
     }
 }
