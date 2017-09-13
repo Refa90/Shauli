@@ -1,4 +1,6 @@
-﻿@model IEnumerable<ShauliBlog.Models.Post>
+﻿@using ShauliBlog.Utils;
+
+@model IEnumerable<ShauliBlog.Models.Post>
 
 @{
     ViewBag.Title = "Index";
@@ -39,10 +41,10 @@
             @Html.DisplayFor(modelItem => item.PublishDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Image)
+            @Html.DisplayImageFor(modelItem => item.Image)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Video)
+            @Html.DisplayVideoFor(modelItem => item.Video)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Headline)

@@ -1,8 +1,8 @@
 ﻿using ShauliBlog.Models;
+using ShauliBlog.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ShauliBlog.Controllers
@@ -26,9 +26,7 @@ namespace ShauliBlog.Controllers
             };
 
 
-
-
-    Post post = new Post
+            Post post = new Post
             {
                 Author = "Or Yanovsky",
                 AuthorWebsiteAddress = "https://www.kaki.com",
@@ -39,12 +37,12 @@ namespace ShauliBlog.Controllers
                 PublishDate = DateTime.Now,
                 Headline = "post headline",
                 Content = "post content post conent post content",
-                Image = new byte[] { 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1 },
-                Video = new byte[] { 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1 },
+                Image = Consts.IMAGE_PATH + "flower.png",
+                Video = Consts.VIDEO_PATH + "shauli.mp4",
                 //UploadedImage = null
             };
 
-           post = db.Posts.Add(post);
+            post = db.Posts.Add(post);
 
             comment.Post = post;
             comment.PostId = post.Id;
@@ -66,11 +64,11 @@ namespace ShauliBlog.Controllers
             return View(viewPath, posts);
         }
 
-        [HttpPost]
-        public ActionResult CreatePost(Post post)
-        {
-            return postsController.Create(post);
-        }
+        //[HttpPost]
+        //public ActionResult CreatePost(Post post)
+        //{
+        //    return postsController.Create(post);
+        //}
 
         [HttpGet]
         public ActionResult CreatePost()
@@ -126,7 +124,7 @@ namespace ShauliBlog.Controllers
 
         public ActionResult Delete(int? id)
         {
-           return commentController.Delete(id);
+            return commentController.Delete(id);
         }
 
         public ActionResult DeleteConfirmed(int id)
@@ -138,5 +136,5 @@ namespace ShauliBlog.Controllers
 
 
 
-}
+    }
 }

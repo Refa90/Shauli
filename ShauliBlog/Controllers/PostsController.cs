@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ShauliBlog.Models;
+using ShauliBlog.Utils;
 
 namespace ShauliBlog.Controllers
 {
@@ -46,10 +47,27 @@ namespace ShauliBlog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,PublishDate,Image,Video,Headline,Author,AuthorWebsiteAddress,Content")] Post post)
+        public ActionResult Create([Bind(Include = "Id,PublishDate,ImagePath,VideoPath,Headline,Author,AuthorWebsiteAddress,Content")] Post post, HttpPostedFileBase Image, HttpPostedFileBase Video)
         {
+            string imageName = System.IO.Path.GetFileName(Image.FileName);
+            string relativeImagePath = Consts.IMAGE_PATH + imageName;
+            string absolueImagePath = System.IO.Path.Combine(Server.MapPath(Consts.IMAGE_PATH), imageName);
+
+            string videoName = System.IO.Path.GetFileName(Video.FileName);
+            string relativeVideoPath = Consts.VIDEO_PATH + videoName;
+            string absoluteVideoPath = System.IO.Path.Combine(Server.MapPath(Consts.VIDEO_PATH), videoName);
+
+            post.Image = relativeImagePath;
+            post.Video = relativeVideoPath;
+
             if (ModelState.IsValid)
             {
+                // file is uploaded
+                Image.SaveAs(absolueImagePath);
+                
+                // file is uploaded
+                Video.SaveAs(absoluteVideoPath);
+                
                 db.Posts.Add(post);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,7 +96,7 @@ namespace ShauliBlog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PublishDate,Image,Video,Headline,Author,AuthorWebsiteAddress,Content")] Post post)
+        public ActionResult Edit([Bind(Include = "Id,PublishDate,ImagePath,VideoPath,Headline,Author,AuthorWebsiteAddress,Content")] Post post)
         {
             if (ModelState.IsValid)
             {
