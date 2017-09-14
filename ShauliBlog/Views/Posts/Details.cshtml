@@ -1,4 +1,6 @@
-﻿@model ShauliBlog.Models.Post
+﻿@using ShauliBlog.Utils;
+@model ShauliBlog.Models.Post
+
 
 @{
     ViewBag.Title = "Details";
@@ -19,21 +21,21 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
+        @Html.DisplayNameFor(model => model.Image)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
+    <dd>
+        @Html.DisplayImageFor(model => model.Image)
+    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Video)
-        </dt>
+    <dt>
+        @Html.DisplayNameFor(model => model.Video)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Video)
-        </dd>
-
+    <dd>
+        @Html.DisplayVideoFor(model => model.Video)
+    </dd>
+    
         <dt>
             @Html.DisplayNameFor(model => model.Headline)
         </dt>

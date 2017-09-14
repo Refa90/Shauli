@@ -14,12 +14,14 @@
         <th>
             @Html.DisplayNameFor(model => model.PublishDate)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Video)
-        </th>
+       @* <th>
+        @Html.DisplayNameFor(model => model.Image)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Video)
+    </th>
+
+    *@
         <th>
             @Html.DisplayNameFor(model => model.Headline)
         </th>
@@ -40,12 +42,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.PublishDate)
         </td>
-        <td>
-            @Html.DisplayImageFor(modelItem => item.Image)
-        </td>
-        <td>
-            @Html.DisplayVideoFor(modelItem => item.Video)
-        </td>
+        @*
+    <td>
+        @Html.DisplayImageFor(modelItem => item.Image)
+    </td>
+    <td>
+        @Html.DisplayVideoFor(modelItem => item.Video)
+    </td>
+        *@
         <td>
             @Html.DisplayFor(modelItem => item.Headline)
         </td>

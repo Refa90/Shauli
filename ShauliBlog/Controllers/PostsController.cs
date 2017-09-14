@@ -60,6 +60,8 @@ namespace ShauliBlog.Controllers
             post.Image = relativeImagePath;
             post.Video = relativeVideoPath;
 
+            post.PublishDate = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 // file is uploaded
@@ -72,6 +74,8 @@ namespace ShauliBlog.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            
 
             return View(post);
         }
