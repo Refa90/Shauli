@@ -11,16 +11,10 @@ namespace ShauliBlog.Models
         [Required]
         public DateTime PublishDate { get; set; }
 
-        //public byte[] Image { get; set; }
-
-        //public byte[] Video { get; set; }
-
         public string Image { get; set; }
 
         public string Video { get; set; }
 
         public virtual List<Comment> Comments { get; set; }
-
-        //public HttpPostedFileBase UploadedImage { get; set; }
     }
 }

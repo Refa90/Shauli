@@ -55,7 +55,7 @@
                         <header>
                             <h2>@Html.DisplayFor(model => item.Headline)</h2>
 
-                            <p>Posted on <time> @Html.DisplayFor(model => item.PublishDate)</time> by <a href="#">@Html.DisplayFor(model => item.Author)</a> - <a href="#comments">@(item.Comments != null ? item.Comments.Count : 0) comments</a></p>
+                            <p>Posted on <time> @Html.DisplayFor(model => item.PublishDate)</time> by <a href="@item.AuthorWebsiteAddress">@Html.DisplayFor(model => item.Author)</a> - <a href="#comments">@(item.Comments != null ? item.Comments.Count : 0) comments</a></p>
                         </header>
                         <div>
 
@@ -85,17 +85,12 @@
                     }
 
                 </section>
-
-
-
-
+                
                 @Html.Partial("~/Views/Blog/AddComment.cshtml", item.NewComment)
-
             }
 
             <a href="/Posts">Manage Posts</a>
         </div>
-
     </div>
 
 

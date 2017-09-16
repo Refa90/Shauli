@@ -3,7 +3,7 @@
 @model List<Comment>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Details";
 }
 
 <h2>Index</h2>
@@ -46,7 +46,12 @@
                         @Html.DisplayFor(model => comment.Content)
                     </td>
                     <td>
-                        @Html.ActionLink("Delete", "Delete", "Comment", new { Id = comment.Id })
+                        @using (Html.BeginForm("DeleteConfirmed", "Comment", new { id = comment.Id }, FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <input type="submit" value="delete" />
+                        }
                     </td>
                 </tr>
             }

@@ -11,11 +11,11 @@ namespace ShauliBlog.Models
         public string Headline { get; set; }
 
         [Required]
-        [Display(Name = "Name")]
         public string Author { get; set; }
 
         [Required]
         [DataType(DataType.Url)]
+        [Display(Name = "Author Website")]
         public string AuthorWebsiteAddress { get; set; }
 
         [Required]

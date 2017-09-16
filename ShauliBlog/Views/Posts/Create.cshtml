@@ -1,5 +1,6 @@
 ﻿@using ShauliBlog.Utils;
 
+<script src="~/Scripts/custom/post.js"></script>
 
 @model ShauliBlog.Models.Post
 
@@ -17,61 +18,21 @@
         <h4>Post</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.PublishDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.EditorFor(model => model.PublishDate, new { htmlAttributes = new { @class = "form-control" } })
-                  @Html.ValidationMessageFor(model => model.PublishDate, "", new { @class = "text-danger" })*@
-                @Html.DisplayFor(model => model.PublishDate)
-            </div>
-        </div>
-
-
-
-       
 
         <div class="form-group">
-
-            <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $('#ImageUpload').hide();
-                    $('#enable_image_upload').change(function () {
-                        $('#ImageUpload').toggle()
-                    });
-                });
-            </script>
-
-
             <input type="checkbox" id="enable_image_upload" />
             @Html.LabelFor(model => model.Image, htmlAttributes: new { style = "display:inline;" })
             <div class="col-md-10"  id="ImageUpload">
-                @*@Html.FileFor(model => model.UploadedImage, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.FileFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
-
-
         <div class="form-group">
-
-            <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $('#VideoUpload').hide();
-                    $('#enable_video_upload').change(function () {
-                        $('#VideoUpload').toggle()
-                    });
-                });
-            </script>
-
             <input type="checkbox" id="enable_video_upload" />
 
             @Html.LabelFor(model => model.Video, htmlAttributes: new { style = "display:inline;" })
             <div class="col-md-10" id="VideoUpload">
                 @Html.FileFor(model => model.Video, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.Video, "", new { @class = "text-danger" })*@
             </div>
         </div>
 

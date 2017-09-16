@@ -47,34 +47,18 @@ namespace ShauliBlog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,PublishDate,ImagePath,VideoPath,Headline,Author,AuthorWebsiteAddress,Content")] Post post, HttpPostedFileBase Image, HttpPostedFileBase Video)
+        public ActionResult Create([Bind(Include = "Id,PublishDate,Headline,Author,AuthorWebsiteAddress,Content")] Post post, HttpPostedFileBase Image, HttpPostedFileBase Video)
         {
-            string imageName = System.IO.Path.GetFileName(Image.FileName);
-            string relativeImagePath = Consts.IMAGE_PATH + imageName;
-            string absolueImagePath = System.IO.Path.Combine(Server.MapPath(Consts.IMAGE_PATH), imageName);
-
-            string videoName = System.IO.Path.GetFileName(Video.FileName);
-            string relativeVideoPath = Consts.VIDEO_PATH + videoName;
-            string absoluteVideoPath = System.IO.Path.Combine(Server.MapPath(Consts.VIDEO_PATH), videoName);
-
-            post.Image = relativeImagePath;
-            post.Video = relativeVideoPath;
-
             post.PublishDate = DateTime.Now;
 
             if (ModelState.IsValid)
             {
-                // file is uploaded
-                Image.SaveAs(absolueImagePath);
-                
-                // file is uploaded
-                Video.SaveAs(absoluteVideoPath);
+                post = HandleMedia(post, Image, Video);
                 
                 db.Posts.Add(post);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             
 
             return View(post);
@@ -100,10 +84,12 @@ namespace ShauliBlog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PublishDate,ImagePath,VideoPath,Headline,Author,AuthorWebsiteAddress,Content")] Post post)
+        public ActionResult Edit([Bind(Include = "Id,PublishDate,Headline,Author,AuthorWebsiteAddress,Content")] Post post, HttpPostedFileBase Image, HttpPostedFileBase Video)
         {
             if (ModelState.IsValid)
             {
+                post = HandleMedia(post, Image, Video);
+
                 db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -144,6 +130,36 @@ namespace ShauliBlog.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private Post HandleMedia(Post post, HttpPostedFileBase Image, HttpPostedFileBase Video)
+        {
+            string absolueImagePath = null;
+            string absoluteVideoPath = null;
+
+            if (Image != null)
+            {
+                string imageName = System.IO.Path.GetFileName(Image.FileName);
+                string relativeImagePath = Consts.IMAGE_PATH + imageName;
+                absolueImagePath = System.IO.Path.Combine(Server.MapPath(Consts.IMAGE_PATH), imageName);
+                post.Image = relativeImagePath;
+
+                // file is uploaded
+                Image.SaveAs(absolueImagePath);
+            }
+
+            if (Video != null)
+            {
+                string videoName = System.IO.Path.GetFileName(Video.FileName);
+                string relativeVideoPath = Consts.VIDEO_PATH + videoName;
+                absoluteVideoPath = System.IO.Path.Combine(Server.MapPath(Consts.VIDEO_PATH), videoName);
+                post.Video = relativeVideoPath;
+
+                // file is uploaded
+                Video.SaveAs(absoluteVideoPath);
+            }
+
+            return post;
         }
     }
 }

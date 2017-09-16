@@ -77,6 +77,10 @@
 
                 <br />
 
+                @Scripts.Render("~/bundles/jquery")
+                @Scripts.Render("~/bundles/bootstrap")
+                @RenderSection("scripts", required: false)
+
                 @RenderBody()
 
                 <hr />
@@ -150,8 +154,6 @@
 
 
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    
 </body>
 </html>

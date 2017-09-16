@@ -1,4 +1,6 @@
-﻿@model ShauliBlog.Models.Post
+﻿@using ShauliBlog.Utils
+
+@model ShauliBlog.Models.Post
 
 @{
     ViewBag.Title = "Delete";
@@ -24,7 +26,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Image)
+            @Html.DisplayImageFor(model => model.Image)
         </dd>
 
         <dt>
@@ -32,7 +34,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Video)
+            @Html.DisplayVideoFor(model => model.Video)
         </dd>
 
         <dt>

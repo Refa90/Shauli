@@ -193,6 +193,7 @@
     </Content>
     <Content Include="fonts\sansation_light.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\custom\post.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -235,7 +236,7 @@
     <Content Include="Views\Comment\Edit.cshtml" />
     <Content Include="Views\Comment\Index.cshtml" />
     <Content Include="Views\Manage\PostManagement.cshtml" />
-    <Content Include="Views\PostComments\Index.cshtml" />
+    <Content Include="Views\PostComments\Details.cshtml" />
     <Content Include="Views\Blog\AddComment.cshtml" />
   </ItemGroup>
   <ItemGroup>

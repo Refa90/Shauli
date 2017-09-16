@@ -12,44 +12,17 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PublishDate)
-        </th>
-       @* <th>
-        @Html.DisplayNameFor(model => model.Image)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.Video)
-    </th>
-
-    *@
-        <th>
             @Html.DisplayNameFor(model => model.Headline)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Author)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AuthorWebsiteAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PublishDate)
-        </td>
-        @*
-    <td>
-        @Html.DisplayImageFor(modelItem => item.Image)
-    </td>
-    <td>
-        @Html.DisplayVideoFor(modelItem => item.Video)
-    </td>
-        *@
         <td>
             @Html.DisplayFor(modelItem => item.Headline)
         </td>
@@ -57,20 +30,13 @@
             @Html.DisplayFor(modelItem => item.Author)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.AuthorWebsiteAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Comments", "Details", "PostComments", new { Postid = item.Id }, null)
         </td>
     </tr>
-}
-
-
+    }
 
 </table>
 
