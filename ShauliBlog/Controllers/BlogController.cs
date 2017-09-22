@@ -118,17 +118,17 @@ namespace ShauliBlog.Controllers
             return commentController.Create(comment);
         }
 
-        public ActionResult Edit(int? id)
+        public ActionResult CommentEdit(int? id)
         {
             return commentController.Edit(id);
         }
 
-        public ActionResult Delete(int? id)
+        public ActionResult CommentDelete(int? id)
         {
             return commentController.Delete(id);
         }
 
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult CommentDeleteConfirmed(int id)
         {
             return commentController.DeleteConfirmed(id);
         }

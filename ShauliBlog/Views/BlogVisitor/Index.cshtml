@@ -6,78 +6,78 @@
 @{
     ViewBag.Title = "Index";
 }
+<div id="mainContent">
+    <h2>Index</h2>
 
-<h2>Index</h2>
-
-@foreach (BlogVisitorModel post in Model)
-{
-    <div>
-        <h4>Post</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => post.Headline)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => post.Headline)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => post.PublishDate)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => post.PublishDate)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => post.Author)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => post.Author)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => post.AuthorWebsiteAddress)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => post.AuthorWebsiteAddress)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => post.AuthorWebsiteAddress)
-            </dt>
-
-            <dt>
-                @Html.DisplayNameFor(model => post.Content)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => post.Content)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => post.Image)
-            </dt>
-
-            <dd>
-                @Html.ImageFor(model => post.Image)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => post.Video)
-            </dt>
-
-            <dd>
-                @Html.VideoFor(model => post.Video)
-            </dd>
-
-            @foreach (Comment comment in post.Comments)
-            {
+    @foreach (BlogVisitorModel post in Model)
+    {
+        <div>
+            <h4>Post</h4>
+            <hr />
+            <dl class="dl-horizontal">
                 <dt>
+                    @Html.DisplayNameFor(model => post.Headline)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => post.Headline)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => post.PublishDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => post.PublishDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => post.Author)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => post.Author)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => post.AuthorWebsiteAddress)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => post.AuthorWebsiteAddress)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => post.AuthorWebsiteAddress)
+                </dt>
+
+                <dt>
+                    @Html.DisplayNameFor(model => post.Content)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => post.Content)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => post.Image)
+                </dt>
+
+                <dd>
+                    @Html.ImageFor(model => post.Image)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => post.Video)
+                </dt>
+
+                <dd>
+                    @Html.VideoFor(model => post.Video)
+                </dd>
+
+                @foreach (Comment comment in post.Comments)
+                {
+                    <dt>
                     <dt>
                         @Html.DisplayNameFor(model => comment.Author)
                     </dt>
@@ -99,70 +99,70 @@
                         @Html.DisplayFor(model => comment.Content)
                     </dd>
 
-                   @using (Ajax.BeginForm("Create","Comment", new AjaxOptions()
-                   {
-                       HttpMethod = "Post",
-                       
-                   }))
-                   {
-                    @Html.AntiForgeryToken()
+                    @using (Ajax.BeginForm("Create", "Comment", new AjaxOptions()
+                    {
+                        HttpMethod = "Post",
 
-                    <div class="form-horizontal">
-                        <h4>Comment</h4>
-                        <hr />
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        @Html.HiddenFor(model => post.Id)
+                    }))
+                    {
+                        @Html.AntiForgeryToken()
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => post.NewComment.Headline, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => post.NewComment.Headline, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => post.NewComment.Headline, "", new { @class = "text-danger" })
+                        <div class="form-horizontal">
+                            <h4>Comment</h4>
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => post.Id)
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => post.NewComment.Headline, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => post.NewComment.Headline, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => post.NewComment.Headline, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => post.NewComment.Author, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => post.NewComment.Author, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => post.NewComment.Author, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => post.NewComment.AuthorWebsiteAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => post.NewComment.AuthorWebsiteAddress, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => post.NewComment.AuthorWebsiteAddress, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => post.NewComment.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => post.NewComment.Content, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => post.NewComment.Content, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Create" class="btn btn-default" />
+                                </div>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => post.NewComment.Author, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => post.NewComment.Author, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => post.NewComment.Author, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => post.NewComment.AuthorWebsiteAddress, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => post.NewComment.AuthorWebsiteAddress, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => post.NewComment.AuthorWebsiteAddress, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => post.NewComment.Content, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => post.NewComment.Content, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => post.NewComment.Content, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Create" class="btn btn-default" />
-                            </div>
-                        </div>
-                    </div>
-                   }
+                    }
 
 
-                </dt>
-            }
+                    </dt>
+                }
 
-        </dl>
+            </dl>
+        </div>
+    }
     </div>
-}
 
-
-@*<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>*@
+    @*<p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>*@

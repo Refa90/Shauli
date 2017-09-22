@@ -5,60 +5,61 @@
 @{
     ViewBag.Title = "Details";
 }
+<div id="mainContent">
+    <h2>Index</h2>
 
-<h2>Index</h2>
-
-<div>
-    <table>
-        <thead>
-            <tr>
-                <th>
-                    Headline
-                </th>
-                <th>
-                    Author
-                </th>
-                <th>
-                    Author Website Address
-                </th>
-                <th>
-                    Content
-                </th>
-                <th>
-                    Delete
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (Comment comment in Model)
-            {
+    <div>
+        <table>
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(model => comment.Headline)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => comment.Author)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => comment.AuthorWebsiteAddress)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => comment.Content)
-                    </td>
-                    <td>
-                        @using (Html.BeginForm("DeleteConfirmed", "Comment", new { id = comment.Id }, FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-
-                            <input type="submit" value="delete" />
-                        }
-                    </td>
+                    <th>
+                        Headline
+                    </th>
+                    <th>
+                        Author
+                    </th>
+                    <th>
+                        Author Website Address
+                    </th>
+                    <th>
+                        Content
+                    </th>
+                    <th>
+                        Delete
+                    </th>
                 </tr>
-            }
-        </tbody>    
-    </table>
+            </thead>
+            <tbody>
+                @foreach (Comment comment in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => comment.Headline)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => comment.Author)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => comment.AuthorWebsiteAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => comment.Content)
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("CommentDeleteConfirmed", "Blog", new { id = comment.Id }, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
 
+                                <input type="submit" value="delete" />
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
