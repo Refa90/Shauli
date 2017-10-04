@@ -52,6 +52,7 @@ namespace ShauliBlog.Controllers
 
             //List<BlogVisitorModel> model = db.Posts.Include("Comments").ToList().Select(x => new BlogVisitorModel(post)).ToList();
 
+          
             List<BlogVisitorModel> model = db.Posts.Include("Comments").ToList().Select(x => new BlogVisitorModel(x)).ToList();
             return View(model);
         }
