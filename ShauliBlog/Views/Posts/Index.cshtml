@@ -8,6 +8,13 @@
 <div id="mainContent">
     <h2>Posts Manager</h2>
 
+    <h4><u> Search:</u></h4>
+    <form asp-controller="Posts" asp-action="Index">
+        <p>
+            Title: <input type="text" name="SearchString">
+            <input type="submit" value="Filter" />
+        </p>
+    </form>
 
     <table class="table">
         <tr>
@@ -32,7 +39,7 @@
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
                     @Html.ActionLink("Comments", "Details", "PostComments", new { Postid = item.Id }, null)
                 </td>
             </tr>

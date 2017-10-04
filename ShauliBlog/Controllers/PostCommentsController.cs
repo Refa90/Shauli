@@ -13,19 +13,26 @@ namespace ShauliBlog.Controllers
 
         private ShauliBlogContext db = new ShauliBlogContext();
 
-        public ActionResult Details(int? Postid)
+        public ActionResult Details(int? Postid, string searchString)
         {
             if (Postid == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            var comments = db.Comments.Where(comment => comment.PostId == Postid);
 
-            List<Comment> comments= db.Comments.Where(comment => comment.PostId == Postid).ToList();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                comments = comments.Where(s => s.Headline.Contains(searchString));
+            }
+
             if (comments == null)
             {
                 return HttpNotFound();
             }
-            return View(comments);
+            List<Comment> CommentList = comments.ToList<Comment>();
+
+            return View(CommentList);
         }
 
     }

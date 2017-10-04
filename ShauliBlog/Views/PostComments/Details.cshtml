@@ -6,7 +6,17 @@
     ViewBag.Title = "Details";
 }
 <div id="mainContent">
-    <h2>Index</h2>
+    <h2>Comment Details</h2>
+
+
+    <h4><u> Search:</u></h4>
+    <form asp-controller="PostComments" asp-action="Details">
+        <p>
+            Title: <input type="text" name="SearchString">
+            <input value="@Model.First().PostId" name="Postid" hidden="hidden"/>
+            <input type="submit" value="Filter" />
+        </p>
+    </form>
 
     <div>
         <table>
@@ -60,6 +70,7 @@
 
     </div>
     <p>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to List", "Index", "Posts")
+        
     </p>
 </div>

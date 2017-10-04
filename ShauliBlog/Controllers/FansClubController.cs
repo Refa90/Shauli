@@ -15,9 +15,16 @@ namespace ShauliBlog.Controllers
         private ShauliBlogContext db = new ShauliBlogContext();
 
         // GET: FansClub
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(db.Fans.ToList());
+            var fans = from f in db.Fans select f;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                fans = fans.Where(s => s.FirstName.Contains(searchString));
+            }
+
+            return View(fans.ToList());
         }
 
         // GET: FansClub/Details/5

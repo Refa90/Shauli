@@ -79,7 +79,7 @@ namespace ShauliBlog.Controllers
 
         public ActionResult GetPosts()
         {
-            return postsController.Index();
+            return postsController.Index("");
         }
 
         public ActionResult PostDetails(int? id)
@@ -100,7 +100,7 @@ namespace ShauliBlog.Controllers
 
         public ActionResult PostCommentsDetails(int? id)
         {
-            return postCommentsController.Details(id);
+            return postCommentsController.Details(id,"");
         }
 
         public ActionResult GetComments()

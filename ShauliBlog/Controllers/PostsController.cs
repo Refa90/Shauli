@@ -16,9 +16,16 @@ namespace ShauliBlog.Controllers
         private ShauliBlogContext db = new ShauliBlogContext();
 
         // GET: Posts
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(db.Posts.ToList());
+            var posts = from p in db.Posts select p;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                posts = posts.Where(s => s.Headline.Contains(searchString));
+            }
+
+            return View(posts.ToList());
         }
 
         // GET: Posts/Details/5

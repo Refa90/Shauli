@@ -10,6 +10,13 @@
         <p>
             @Html.ActionLink("Create New", "Create")
         </p>
+        <h4><u> Search:</u></h4>
+        <form asp-controller="FansClub" asp-action="Index">
+            <p>
+                First Name: <input type="text" name="SearchString">
+                <input type="submit" value="Filter" />
+            </p>
+        </form>
         <table class="table">
             <tr>
                 <th>
