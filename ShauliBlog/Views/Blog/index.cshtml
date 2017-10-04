@@ -7,67 +7,71 @@
     ViewBag.Title = "index";
 }
 
-    <div id="mainContent">
-        <div>
-            <div id="search">
-                <form action="">
-                    <div>
-                        <text>post publish start date: </text>
-                        <input type="date" name="searchStartDate">
-                    </div>
 
-                    <div>
-                        <text>post publish end date: </text>
-                        <input type="date" name="searchEndDate">
-                    </div>
 
-                    <div>
-                        <text>post writter: </text>
-                        <input type="text" name="searchPostWritter">
-                    </div>
+<div id="mainContent">
+    <div>
+        <div id="search">
+            <form action="">
+                <div>
+                    <text>post publish start date: </text>
+                    <input type="date" name="searchStartDate">
+                </div>
 
-                    <div>
-                        <text>post writter e-mail:</text>
-                        <input type="email" name="searchPostWritterEmail">
-                    </div>
+                <div>
+                    <text>post publish end date: </text>
+                    <input type="date" name="searchEndDate">
+                </div>
 
-                    <div>
-                        <text>post phrases: </text>
-                        <input type="text" name="searchPostPhrases">
-                    </div>
+                <div>
+                    <text>post writter: </text>
+                    <input type="text" name="searchPostWritter">
+                </div>
 
-                    <div>
-                        <text>number of posts comments:</text>
-                        <input type="range" name="searchPostCommentsNumber" min="0" max="10">
-                    </div>
-                    <br />
-                    <input type="submit" value="Send" style="float: left;">
+                <div>
+                    <text>post writter e-mail:</text>
+                    <input type="email" name="searchPostWritterEmail">
+                </div>
 
-                </form>
-            </div>
+                <div>
+                    <text>post phrases: </text>
+                    <input type="text" name="searchPostPhrases">
+                </div>
 
-            @foreach (BlogVisitorModel item in Model)
+                <div>
+                    <text>number of posts comments:</text>
+                    <input type="range" name="searchPostCommentsNumber" min="0" max="10">
+                </div>
+                <br />
+                <input type="submit" value="Send" style="float: left;">
+
+            </form>
+        </div>
+
+        @foreach (BlogVisitorModel item in Model)
             {
 
-                @*********** Post *********@
-                <section>
-                    <article class="blogPost">
-                        <header>
-                            <h2>@Html.DisplayFor(model => item.Headline)</h2>
+            @*********** Post *********@
+            <section>
+                <article class="blogPost">
+                    <header>
+                        <h2>@Html.DisplayFor(model => item.Headline)</h2>
 
-                            <p>Posted on <time> @Html.DisplayFor(model => item.PublishDate)</time> by <a href="@item.AuthorWebsiteAddress">@Html.DisplayFor(model => item.Author)</a> - <a href="#comments">@(item.Comments != null ? item.Comments.Count : 0) comments</a></p>
-                        </header>
-                        <div>
+                        <p>Posted on <time> @Html.DisplayFor(model => item.PublishDate)</time> by <a href="@item.AuthorWebsiteAddress">@Html.DisplayFor(model => item.Author)</a> - <a href="#comments">@(item.Comments != null ? item.Comments.Count : 0) comments</a></p>
+                    </header>
+                    <div>
 
-                            <p>@Html.DisplayFor(model => item.Content)</p>
+                        <p>@Html.DisplayFor(model => item.Content)</p>
 
-                            @Html.DisplayImageFor(model => item.Image)
+                        <input type="button" value="translate" class="translate"/>
 
-                            @Html.DisplayVideoFor(model => item.Video)
-                          
-                        </div>
-                    </article>
-                </section>
+                        @Html.DisplayImageFor(model => item.Image)
+
+                        @Html.DisplayVideoFor(model => item.Video)
+
+                    </div>
+                </article>
+            </section>
 
                 @*********** Comment *********@
 
@@ -85,13 +89,15 @@
                     }
 
                 </section>
-                
-                @Html.Partial("~/Views/Blog/AddComment.cshtml", item.NewComment)
-            }
 
-            <a href="/Posts">Manage Posts</a>
-        </div>
+                @Html.Partial("~/Views/Blog/AddComment.cshtml", item.NewComment)
+        }
+
+        <a href="/Posts">Manage Posts</a>
     </div>
+</div>
+
+<script src="~/Scripts/custom/translate.js"></script>
 
 
 

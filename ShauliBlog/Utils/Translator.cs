@@ -11,7 +11,7 @@ namespace ShauliBlog.Utils
         //private const string URL = "https://translate.google.com/?hl=fi&ie=UTF8&text=my+name+is+mike&langpair=fi";
         private const string URL = "https://translate.google.com/?hl={0}&ie=UTF8&text={1}&langpair={0}";
 
-        public string translate(string origPhrase, string languageCode)
+        public string Translate(string origPhrase, string languageCode)
         {
             string result = string.Empty;
 
@@ -25,9 +25,9 @@ namespace ShauliBlog.Utils
 
             string rawResult = webClient.DownloadString(url);
 
-            rawResult  = rawResult.Substring(result.IndexOf("<span title=\"") + "<span title=\"".Length);
-            rawResult = rawResult.Substring(result.IndexOf(">") + 1);
-            rawResult = rawResult.Substring(0, result.IndexOf("</span>"));
+            rawResult  = rawResult.Substring(rawResult.IndexOf("<span title=\"") + "<span title=\"".Length);
+            rawResult = rawResult.Substring(rawResult.IndexOf(">") + 1);
+            rawResult = rawResult.Substring(0, rawResult.IndexOf("</span>"));
 
             result = rawResult.Trim();
 
