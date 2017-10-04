@@ -205,7 +205,6 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\Consts.cs" />
     <Compile Include="Utils\HtmlExtensions.cs" />
-    <Compile Include="Utils\IdentityManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\layout.css" />

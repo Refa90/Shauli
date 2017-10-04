@@ -1,10 +1,8 @@
-﻿using ShauliBlog.Utils;
-using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using ShauliBlog.Utils;
 using System.Data.Entity;
 using System.Diagnostics;
-using System.Linq;
-using System.Web;
 
 namespace ShauliBlog.Models
 {
@@ -14,22 +12,35 @@ namespace ShauliBlog.Models
         {
             Debug.WriteLine("Seed CustomDropCreateDatabaseIfModelChanges identity db..");
 
-            IdentityManager identityManager = new IdentityManager();
+            var _roleManager = new RoleManager<IdentityRole>(
+                new RoleStore<IdentityRole>(context));
 
-            if (!identityManager.RoleExists(Consts.ADMIN_ROLE))
+            var _userManager = new UserManager<ApplicationUser>(
+                new UserStore<ApplicationUser>(context));
+
+
+            IdentityRole identityRole = new IdentityRole
             {
-                identityManager.CreateRole(Consts.ADMIN_ROLE);
-            }
+                Name = Consts.ADMIN_ROLE
+            };
 
-            if (identityManager.GetUserByName(Consts.ADMIN_ROLE) == null)
+            var idResult = _roleManager.Create(identityRole);
+
+            if (idResult.Succeeded)
             {
-                var user = new ApplicationUser { UserName = Consts.ADMIN_ROLE, Email = Consts.ADMIN_ROLE + "@gmail.com" };
+                string auth = Consts.ADMIN_ROLE + "@gmail.com";
 
-                var result = identityManager.CreateUser(user, "Aa12345!");
-
-                if (result)
+                var user = new ApplicationUser
                 {
-                    identityManager.AddUserToRole(user.Id, Consts.ADMIN_ROLE);
+                    UserName = auth,
+                    Email = auth
+                };
+
+                var result = _userManager.Create(user, "Aa12345!");
+
+                if (result.Succeeded)
+                {
+                    _userManager.AddToRoleAsync(user.Id, Consts.ADMIN_ROLE).Wait();
                 }
             }
         }
