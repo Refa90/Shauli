@@ -16,14 +16,22 @@ namespace ShauliBlog.Controllers
         private ShauliBlogContext db = new ShauliBlogContext();
 
         // GET: Posts
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string searchString, bool HasVideo = false, bool HasPicture = false, bool HasComments = false)
         {
             var posts = from p in db.Posts select p;
 
             if (!String.IsNullOrEmpty(searchString))
-            {
                 posts = posts.Where(s => s.Headline.Contains(searchString));
-            }
+
+            if (HasVideo)
+                posts = posts.Where(s => s.Video != null);
+
+            if (HasPicture)
+                posts = posts.Where(s => s.Image != null);
+
+            if (HasComments)
+                posts = posts.Where(s => s.Comments.Count != 0);
+
 
             return View(posts.ToList());
         }

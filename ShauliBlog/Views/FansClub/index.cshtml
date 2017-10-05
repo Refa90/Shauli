@@ -13,7 +13,15 @@
         <h4><u> Search:</u></h4>
         <form asp-controller="FansClub" asp-action="Index">
             <p>
-                First Name: <input type="text" name="SearchString">
+                First Name: @Html.TextBox("SearchString") <br />
+                Gender: @Html.CheckBox("Gender") <br />
+                Adult: @Html.CheckBox("IsAdult") <br />
+                Seniority: @Html.CheckBox("seniorityCB", false, new { onchange = "toggleSeniority()" }) <br />
+                <div id="SeniorityDiv" style="display:none">
+                    @Html.DropDownList("ddl", new List<SelectListItem> { new SelectListItem { Value = "Higher", Text = "Higher than" },
+                                                                         new SelectListItem { Value = "Lower", Text = "Lower than" } })  &emsp;
+                    @Html.TextBox("seniorityText") <br />
+                </div> <br />
                 <input type="submit" value="Filter" />
             </p>
         </form>
@@ -64,6 +72,21 @@
             }
 
         </table>
+        <br/>
     </div>
 </div>
 
+<script>
+    function toggleSeniority() {
+        var x = document.getElementById('SeniorityDiv');
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }
+    }
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

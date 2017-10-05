@@ -15,44 +15,16 @@ namespace ShauliBlog.Controllers
         CommentController commentController = new CommentController();
 
         // GET: Blog
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            //Comment comment = new Comment
-            //{
-            //    Author = "kaki1",
-            //    AuthorWebsiteAddress = "https://www.kaki.com",
-            //    Content = "this is the content of the comment",
-            //    Headline = "this is the headline of the comment"
-            //};
+            var posts = from p in db.Posts select p;
 
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                posts = posts.Where(s => s.Headline.Contains(searchString));
+            }
+            List<BlogVisitorModel> model = posts.ToList().Select(x => new BlogVisitorModel(x)).ToList();
 
-            //Post post = new Post
-            //{
-            //    Author = "Or Yanovsky",
-            //    AuthorWebsiteAddress = "https://www.kaki.com",
-            //    Comments = new List<Comment>
-            //    {
-            //        comment
-            //    },
-            //    PublishDate = DateTime.Now,
-            //    Headline = "post headline",
-            //    Content = "post content post conent post content",
-            //    Image = Consts.IMAGE_PATH + "flower.png",
-            //    Video = Consts.VIDEO_PATH + "shauli.mp4",
-            //};
-
-            //post = db.Posts.Add(post);
-
-            //comment.Post = post;
-            //comment.PostId = post.Id;
-
-            //comment = db.Comments.Add(comment);
-
-            //db.SaveChanges();
-
-            //List<BlogVisitorModel> model = db.Posts.Include("Comments").ToList().Select(x => new BlogVisitorModel(post)).ToList();
-
-            List<BlogVisitorModel> model = db.Posts.Include("Comments").ToList().Select(x => new BlogVisitorModel(x)).ToList();
             return View(model);
         }
 

@@ -15,7 +15,7 @@ namespace ShauliBlog.Controllers
         private ShauliBlogContext db = new ShauliBlogContext();
 
         // GET: FansClub
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string searchString, string ddl, bool Gender = false, bool IsAdult = false, bool seniorityCB = false, string seniorityText="")
         {
             var fans = from f in db.Fans select f;
 
@@ -24,6 +24,24 @@ namespace ShauliBlog.Controllers
                 fans = fans.Where(s => s.FirstName.Contains(searchString));
             }
 
+            if (Gender)
+                fans = fans.Where(s => s.Gender == true);
+
+            var currentDate = DateTime.Today.Year;
+            if (IsAdult)
+                fans = fans.Where(s => currentDate - s.BirthDate.Year > 18 );
+
+            if (seniorityCB)
+            {
+                if (seniorityText != "")
+                {
+                    int seniorityNum = Int32.Parse(seniorityText);
+                    if (ddl == "Higher")
+                        fans = fans.Where(s => s.Seniority > seniorityNum);
+                    else
+                        fans = fans.Where(s => s.Seniority < seniorityNum);
+                }
+            }
             return View(fans.ToList());
         }
 

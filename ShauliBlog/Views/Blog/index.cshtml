@@ -10,39 +10,12 @@
     <div id="mainContent">
         <div>
             <div id="search">
-                <form action="">
-                    <div>
-                        <text>post publish start date: </text>
-                        <input type="date" name="searchStartDate">
-                    </div>
-
-                    <div>
-                        <text>post publish end date: </text>
-                        <input type="date" name="searchEndDate">
-                    </div>
-
-                    <div>
-                        <text>post writter: </text>
-                        <input type="text" name="searchPostWritter">
-                    </div>
-
-                    <div>
-                        <text>post writter e-mail:</text>
-                        <input type="email" name="searchPostWritterEmail">
-                    </div>
-
-                    <div>
-                        <text>post phrases: </text>
-                        <input type="text" name="searchPostPhrases">
-                    </div>
-
-                    <div>
-                        <text>number of posts comments:</text>
-                        <input type="range" name="searchPostCommentsNumber" min="0" max="10">
-                    </div>
-                    <br />
-                    <input type="submit" value="Send" style="float: left;">
-
+                <h4><u> Search:</u></h4>
+                <form asp-controller="Blog" asp-action="Index">
+                    <p>
+                        Title: <input type="text" name="SearchString">
+                        <input type="submit" value="Filter" />
+                    </p>
                 </form>
             </div>
 

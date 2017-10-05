@@ -16,20 +16,16 @@ namespace ShauliBlog.Controllers
         public ActionResult Details(int? Postid, string searchString)
         {
             if (Postid == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+               return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             var comments = db.Comments.Where(comment => comment.PostId == Postid);
 
             if (!String.IsNullOrEmpty(searchString))
-            {
                 comments = comments.Where(s => s.Headline.Contains(searchString));
-            }
 
             if (comments == null)
-            {
                 return HttpNotFound();
-            }
+
             List<Comment> CommentList = comments.ToList<Comment>();
 
             return View(CommentList);
