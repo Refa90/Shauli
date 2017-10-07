@@ -1,0 +1,45 @@
+﻿@using ShauliBlog.Models;
+@using ShauliBlog.Controllers;
+
+@model IQueryable<PostsController.GroupByWebsite>
+
+@{
+    ViewBag.Title = "GroupByWebpage";
+}
+<div id="mainContent">
+    <h2>Comment Details</h2>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Author Website Address
+                    </th>
+                    <th>
+                        Count
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (PostsController.GroupByWebsite item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => item.AuthorWebsiteAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.count)
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <p>
+        @Html.ActionLink("Back to List", "Index", "Posts")
+
+    </p>
+</div>

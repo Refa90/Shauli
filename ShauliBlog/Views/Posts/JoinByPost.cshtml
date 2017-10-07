@@ -1,0 +1,85 @@
+﻿@using ShauliBlog.Models;
+@using ShauliBlog.Controllers;
+@model IQueryable<PostsController.PostJoinComments>
+
+@{
+    ViewBag.Title = "JoinByPost";
+}
+<div id="mainContent">
+    <h2>Join By PostID</h2>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        PostID
+                    </th>
+                    <th>
+                        PostHeadline
+                    </th>
+                    <th>
+                        PostAuthor
+                    </th>
+                    <th>
+                        PostAuthorWebSiteAddress
+                    </th>
+                    <th>
+                        PostPublishDate
+                    </th>
+                    <th>
+                        CommentID
+                    </th>
+                    <th>
+                        CommentHeadline
+                    </th>
+                    <th>
+                        Comment Author
+                    </th>
+                    <th>
+                        CommentAuthorWebsiteAddress
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (PostsController.PostJoinComments item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Headline)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Author)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.AuthorWebsiteAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.PublishDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.commentID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.commentHeadline)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.commentAuthor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.commentAuthorWebSiteAddress)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <p>
+        @Html.ActionLink("Back", "Index", "Posts")
+        
+    </p>
+</div>

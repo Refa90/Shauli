@@ -15,6 +15,26 @@ namespace ShauliBlog.Controllers
     {
         private ShauliBlogContext db = new ShauliBlogContext();
 
+        public class PostJoinComments
+        {
+            public int Id { get; set; }
+            public string Headline { get; set; }
+            public string Author { get; set; }
+            public string AuthorWebsiteAddress { get; set; }
+            public DateTime PublishDate { get; set; }
+            public int commentID { get; set; }
+            public int commentPostID { get; set; }
+            public string commentHeadline { get; set; }
+            public string commentAuthor { get; set; }
+            public string commentAuthorWebSiteAddress { get; set; }
+        }
+
+        public class GroupByWebsite
+        {
+            public string AuthorWebsiteAddress { get; set; }
+            public int count { get; set; }
+        }
+
         // GET: Posts
         public ActionResult Index(string searchString, bool HasVideo = false, bool HasPicture = false, bool HasComments = false)
         {
@@ -50,6 +70,77 @@ namespace ShauliBlog.Controllers
             }
             return View(post);
         }
+
+        public ActionResult JoinByPost()
+        {
+            var posts = from p in db.Posts select p;
+            var comments = from c in db.Comments select c;
+
+            var all = posts.Join(comments,
+                outerKey => outerKey.Id,
+                innerKey => innerKey.PostId,
+                (blogPosts, blogComments) => new PostJoinComments
+                {
+                    Id = blogPosts.Id,
+                    Headline = blogPosts.Headline,
+                    Author = blogPosts.Author,
+                    AuthorWebsiteAddress = blogPosts.AuthorWebsiteAddress,
+                    PublishDate = blogPosts.PublishDate,
+                    commentID = blogComments.Id,
+                    commentHeadline = blogComments.Headline,
+                    commentAuthor = blogComments.Author,
+                    commentAuthorWebSiteAddress = blogComments.AuthorWebsiteAddress
+                }
+                );
+            return View(all);
+        }
+        public ActionResult JoinByAuthor()
+        {
+            var posts = from p in db.Posts select p;
+            var comments = from c in db.Comments select c;
+
+
+            var all = posts.Join(comments,
+                outerKey => outerKey.Author,
+                innerKey => innerKey.Author,
+                (blogPosts, blogComments) => new PostJoinComments
+                {
+                    Id = blogPosts.Id,
+                    Headline = blogPosts.Headline,
+                    Author = blogPosts.Author,
+                    AuthorWebsiteAddress = blogPosts.AuthorWebsiteAddress,
+                    PublishDate = blogPosts.PublishDate,
+                    commentID = blogComments.Id,
+                    commentPostID = blogComments.PostId,
+                    commentHeadline = blogComments.Headline,
+                    commentAuthor = blogComments.Author,
+                    commentAuthorWebSiteAddress = blogComments.AuthorWebsiteAddress
+                }
+                ).Where(s => s.Id == s.commentPostID);
+            return View(all);
+        }
+
+        public ActionResult GroupByWebpage()
+        {
+            
+            //var posts = from p in db.Posts select p;
+            var comments = from c in db.Comments select c;
+            var group = comments.GroupBy(a => a.AuthorWebsiteAddress).Select(c =>  new GroupByWebsite { AuthorWebsiteAddress = c.Key, count = c.Count() });
+
+            return View(group);
+            
+            /*var comments = from c in db.Comments select c;
+            var group = comments.GroupBy(a => a.AuthorWebsiteAddress);
+
+            if (comments == null)
+                return HttpNotFound();
+
+            List<Comment> CommentList = group.ToList<Comment>();
+
+            return View(CommentList);
+            */
+        }
+
 
         // GET: Posts/Create
         public ActionResult Create()

@@ -238,6 +238,9 @@
     <Content Include="Views\Manage\PostManagement.cshtml" />
     <Content Include="Views\PostComments\Details.cshtml" />
     <Content Include="Views\Blog\AddComment.cshtml" />
+    <Content Include="Views\Posts\JoinByPost.cshtml" />
+    <Content Include="Views\Posts\JoinByAuthor.cshtml" />
+    <Content Include="Views\Posts\GroupByWebpage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

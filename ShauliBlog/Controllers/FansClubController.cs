@@ -30,7 +30,7 @@ namespace ShauliBlog.Controllers
             var currentDate = DateTime.Today.Year;
             if (IsAdult)
                 fans = fans.Where(s => currentDate - s.BirthDate.Year > 18 );
-
+            
             if (seniorityCB)
             {
                 if (seniorityText != "")
