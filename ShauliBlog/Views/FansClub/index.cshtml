@@ -1,29 +1,92 @@
-﻿
+﻿@model IEnumerable<ShauliBlog.Models.Fan>
+
 @{
-    ViewBag.Title = "index";
+    ViewBag.Title = "Index";
 }
 
-<div id="content">
-
-        <form action="#" method="post">
-            <h3>Post a comment</h3>
+<div id="mainContent">
+    <div id="fansClub">
+        <h2>Fans Club</h2>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <h4><u> Search:</u></h4>
+        <form asp-controller="FansClub" asp-action="Index">
             <p>
-                <label for="name">Name</label>
-                <input name="name" id="name" type="text" required />
+                First Name: @Html.TextBox("SearchString") <br />
+                Gender: @Html.CheckBox("Gender") <br />
+                Adult: @Html.CheckBox("IsAdult") <br />
+                Seniority: @Html.CheckBox("seniorityCB", false, new { onchange = "toggleSeniority()" }) <br />
+                <div id="SeniorityDiv" style="display:none">
+                    @Html.DropDownList("ddl", new List<SelectListItem> { new SelectListItem { Value = "Higher", Text = "Higher than" },
+                                                                         new SelectListItem { Value = "Lower", Text = "Lower than" } })  &emsp;
+                    @Html.TextBox("seniorityText") <br />
+                </div> <br />
+                <input type="submit" value="Filter" />
             </p>
-            <p>
-                <label for="email">E-mail</label>
-                <input name="email" id="email" type="email" required />
-            </p>
-            <p>
-                <label for="website">Website</label>
-                <input name="website" id="website" type="url" />
-            </p>
-            <p>
-                <label for="comment">Comment</label>
-                <textarea name="comment" id="comment" required></textarea>
-            </p>
-            <p><input type="submit" value="Post comment" /></p>
         </form>
-    </div>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BirthDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Seniority)
+                </th>
+                <th></th>
+            </tr>
 
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BirthDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Seniority)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <br/>
+    </div>
+</div>
+
+<script>
+    function toggleSeniority() {
+        var x = document.getElementById('SeniorityDiv');
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }
+    }
+
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

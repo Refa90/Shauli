@@ -46,6 +46,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -143,12 +151,25 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\BlogVisitorController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\FansClubController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PostCommentsController.cs" />
+    <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BlogVisitorModel.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\Configuration.cs" />
+    <Compile Include="Models\Essay.cs" />
+    <Compile Include="Models\Fan.cs" />
+    <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\ShauliBlogContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Consts.cs" />
+    <Compile Include="Utils\HtmlExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\layout.css" />
@@ -160,6 +181,7 @@
     <Content Include="Content\images\intro_shauli.png" />
     <Content Include="Content\images\rss.png" />
     <Content Include="Content\images\shauli.mp4" />
+    <Content Include="Content\videos\shauli.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -171,6 +193,7 @@
     </Content>
     <Content Include="fonts\sansation_light.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\custom\post.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -196,11 +219,31 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Blog\index.cshtml" />
-    <Content Include="Views\FansClub\index.cshtml" />
+    <Content Include="Views\FansClub\Create.cshtml" />
+    <Content Include="Views\FansClub\Delete.cshtml" />
+    <Content Include="Views\FansClub\Details.cshtml" />
+    <Content Include="Views\FansClub\Edit.cshtml" />
+    <Content Include="Views\FansClub\Index.cshtml" />
+    <Content Include="Views\Posts\Create.cshtml" />
+    <Content Include="Views\Posts\Delete.cshtml" />
+    <Content Include="Views\Posts\Details.cshtml" />
+    <Content Include="Views\Posts\Edit.cshtml" />
+    <Content Include="Views\Posts\Index.cshtml" />
+    <Content Include="Views\BlogVisitor\Index.cshtml" />
+    <Content Include="Views\Comment\Create.cshtml" />
+    <Content Include="Views\Comment\Delete.cshtml" />
+    <Content Include="Views\Comment\Details.cshtml" />
+    <Content Include="Views\Comment\Edit.cshtml" />
+    <Content Include="Views\Comment\Index.cshtml" />
+    <Content Include="Views\Manage\PostManagement.cshtml" />
+    <Content Include="Views\PostComments\Details.cshtml" />
+    <Content Include="Views\Blog\AddComment.cshtml" />
+    <Content Include="Views\Posts\JoinByPost.cshtml" />
+    <Content Include="Views\Posts\JoinByAuthor.cshtml" />
+    <Content Include="Views\Posts\GroupByWebpage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

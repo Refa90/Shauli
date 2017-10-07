@@ -32,16 +32,16 @@
     <header>
         <h1 id="mainHeadline">Ha-Blog Shel Shauli</h1>
     </header>
-    <audio controls autoplay>
+    @*<audio controls autoplay>
         <source src="~/Content/audio/Linkin Park - My December.mp3" type="audio/mpeg">
         Your browser does not support the Audio tag.
 
-    </audio>
+    </audio>*@
     <nav>
         <!-- Navigation -->
         <ul>
-            <li class="selected"><a href="#">Blog</a></li>
-            <li><a href="#">About</a></li>
+            <li>@Html.ActionLink("Blog", "Index", "Blog")</li>
+            <li>@Html.ActionLink("Manage", "Index", "Posts")</li>
             <li>@Html.ActionLink("Fans Club", "Index","FansClub")</li>
             <li><a href="#">Contact</a></li>
             <li class="subscribe">
@@ -64,38 +64,61 @@
         </header>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.</p>
         <img src="~/Content/images/intro_shauli.png" alt="Shauli" />
+
+       
     </section>
 
+    <div>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
 
-        <aside>
-            <section>
-                <header>
-                    <h3>Categories</h3>
-                </header>
-                <ul>
-                    <li><a href="#">Lorem ipsum dolor</a></li>
-                    <li><a href="#">Sit amet consectetur</a></li>
-                    <li><a href="#">Adipisicing elit sed</a></li>
-                </ul>
-            </section>
-            <section>
-                <header>
-                    <h3>Archives</h3>
-                </header>
-                <ul>
-                    <li><a href="#">December 2008</a></li>
-                    <li><a href="#">January 2009</a></li>
-                    <li><a href="#">February 2009</a></li>
-                    <li><a href="#">March 2009</a></li>
-                </ul>
-            </section>
-        </aside>
+        <div class="container body-content">
+            <div id="content">
 
+
+                <br />
+
+                @Scripts.Render("~/bundles/jquery")
+                @Scripts.Render("~/bundles/bootstrap")
+                @RenderSection("scripts", required: false)
+
+                @RenderBody()
+
+                <hr />
+
+                <aside>
+                    <section>
+                        <header>
+                            <h3>Categories</h3>
+                        </header>
+                        <ul>
+                            <li><a href="#">Lorem ipsum dolor</a></li>
+                            <li><a href="#">Sit amet consectetur</a></li>
+                            <li><a href="#">Adipisicing elit sed</a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <header>
+                            <h3>Archives</h3>
+                        </header>
+                        <ul>
+                            <li><a href="#">December 2008</a></li>
+                            <li><a href="#">January 2009</a></li>
+                            <li><a href="#">February 2009</a></li>
+                            <li><a href="#">March 2009</a></li>
+                        </ul>
+                    </section>
+                </aside>
+            </div>
+        </div>
     </div>
+
+   
+
+
+
+    
+   
+
 
 
     <footer>
@@ -128,10 +151,9 @@
             </section>
         </div>
     </footer>
-    
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+
+
+    
 </body>
 </html>
