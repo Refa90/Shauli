@@ -57,14 +57,48 @@
     @Html.ActionLink("Join all Posts with Comments by PostID", "JoinByPost")<br />
     @Html.ActionLink("Join all Posts with Comments by Author", "JoinByAuthor")<br />
     @Html.ActionLink("Group by web page", "GroupByWebpage") <br /> <br />
-
-
-
-
-
-
-
-
-
-
 </div>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1430555593718002',
+      xfbml      : true,
+      version    : 'v2.10'
+    });
+    FB.AppEvents.logPageView();
+
+    FB.getLoginStatus(function (response) {
+        if (response.status === 'connected') {
+            console.log('Logged in.');
+        }
+        else {
+            FB.login();
+        }
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  function checkLoginState() {
+      FB.getLoginStatus(function (response) {
+          statusChangeCallback(response);
+      });
+  }
+
+  var fbPagePost = function () {
+      debugger
+      FB.api('/v2.10/500529936789725/feed', "POST", { access_token: pac, message: $("#postText").val() }, function (response) {
+          console.log(JSON.stringify(response));
+      });
+  }
+</script>
+<br />
+<div class="fb-like" data-href="https://www.facebook.com/haparlament/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div> <br /><br />
+<div class="fb-share-button" data-href="http://www.mako.co.il/mako-vod-keshet/parliament" data-layout="button_count" data-size="small" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.mako.co.il%2Fmako-vod-keshet%2Fparliament&amp;src=sdkpreparse">Share</a></div><br />
