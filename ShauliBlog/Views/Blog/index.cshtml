@@ -1,11 +1,14 @@
 ﻿@using ShauliBlog.Models;
 @using ShauliBlog.Utils;
+@using ShauliBlog.Controllers;
 
 @model List<BlogVisitorModel>
 
 @{
     ViewBag.Title = "index";
 }
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
 
     <div id="mainContent">
         <div>
@@ -19,8 +22,59 @@
                 </form>
             </div>
 
+            <br/>
+
+            <div id="parlamentMap">
+
+                
+
+                <div id="map"></div>
+
+              
+
+
+
+                <script>
+
+
+                    function initMap() {
+
+                        var center = { lat: 32.0878408, lng: 34.7781465 };
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 10,
+                            center: center
+                        });
+
+
+                       @foreach (MapMarker i in ViewBag.markers) {
+                                <text>
+                                var marker = new google.maps.Marker({
+                                    position: new google.maps.LatLng(@i.Lat,@i.Lng),
+                                    label: "@i.Label",
+                                    map: map
+                        });
+                        </text>
+                           }
+                    }
+
+
+                </script>
+                
+                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtmBTYqNBZKGeRSLdeVH9bWykAdQwdcK4&callback=initMap">
+                </script>
+
+              
+
+
+
+
+
+
+
+            </div>
+
             @foreach (BlogVisitorModel item in Model)
-            {
+                        {
 
                 @*********** Post *********@
                 <section>

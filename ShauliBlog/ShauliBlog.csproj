@@ -155,6 +155,7 @@
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\FansClubController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MapMarkersController.cs" />
     <Compile Include="Controllers\PostCommentsController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -165,6 +166,7 @@
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\Essay.cs" />
     <Compile Include="Models\Fan.cs" />
+    <Compile Include="Models\MapMarker.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\ShauliBlogContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -241,6 +243,11 @@
     <Content Include="Views\Posts\JoinByPost.cshtml" />
     <Content Include="Views\Posts\JoinByAuthor.cshtml" />
     <Content Include="Views\Posts\GroupByWebpage.cshtml" />
+    <Content Include="Views\MapMarkers\Create.cshtml" />
+    <Content Include="Views\MapMarkers\Delete.cshtml" />
+    <Content Include="Views\MapMarkers\Details.cshtml" />
+    <Content Include="Views\MapMarkers\Edit.cshtml" />
+    <Content Include="Views\MapMarkers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

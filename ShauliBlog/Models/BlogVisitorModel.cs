@@ -27,4 +27,5 @@ namespace ShauliBlog.Models
             this.NewComment.Post = post;
         }
     }
+
 }

@@ -168,6 +168,17 @@ nav {
     
 }
 
+#parlamentMap {
+    display: table-cell;
+    width: 620px;
+    padding-right: 22px;
+}
+
+#map {
+    height: 200px;
+    width: 100%;
+}
+
 aside {
     display: table-cell;
     width: 300px;

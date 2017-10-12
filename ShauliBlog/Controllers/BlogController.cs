@@ -13,10 +13,13 @@ namespace ShauliBlog.Controllers
         PostsController postsController = new PostsController();
         PostCommentsController postCommentsController = new PostCommentsController();
         CommentController commentController = new CommentController();
+        MapMarkersController mapMarkersController = new MapMarkersController();
 
         // GET: Blog
         public ActionResult Index(string searchString)
         {
+            ViewBag.markers = mapMarkersController.ViewBag.markers;
+
             var posts = from p in db.Posts select p;
 
             if (!String.IsNullOrEmpty(searchString))
