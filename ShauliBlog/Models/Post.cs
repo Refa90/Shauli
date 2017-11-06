@@ -16,5 +16,7 @@ namespace ShauliBlog.Models
         public string Video { get; set; }
 
         public virtual List<Comment> Comments { get; set; }
+
+        public virtual List<Post> RecommendedPosts { get; set; }
     }
 }

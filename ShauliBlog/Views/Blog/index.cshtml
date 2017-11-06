@@ -7,6 +7,8 @@
     ViewBag.Title = "index";
 }
 
+
+
     <div id="mainContent">
         <div>
             <div id="search">
@@ -33,6 +35,8 @@
                         <div>
 
                             <p>@Html.DisplayFor(model => item.Content)</p>
+
+                        <input type="button" value="translate" class="translate"/>
 
                             @Html.DisplayImageFor(model => item.Image)
 
@@ -63,6 +67,8 @@
             }
         </div>
     </div>
+
+<script src="~/Scripts/custom/translate.js"></script>
 
 
 
