@@ -9,6 +9,8 @@ namespace ShauliBlog.Utils
 {
     public class Learning
     {
+        private ShauliBlogContext context = new ShauliBlogContext();
+
         public void Recommend(Post post)
         {
 
@@ -72,6 +74,66 @@ namespace ShauliBlog.Utils
                         //     [3] -> [4]; support: 3, confidence: 0.75, 
                         //     [4] -> [3]; support: 3, confidence: 0.6 
                         // };
+        }
+
+        public List<Post> RecommendNew(Post givenPost)
+        {
+            List<Post> recommendedPosts = new List<Post>();
+
+            var totalPosts = context.Posts.ToList();
+
+            List<SortedSet<string>> dataset = new List<SortedSet<string>>();
+
+            string[] postWords = givenPost.Content.Split(' ');
+
+            for (int i = 0; i < totalPosts.Count; i++)
+            {
+                if (totalPosts[i].Id != givenPost.Id)
+                {
+                    string[] words = totalPosts[i].Content.Split(' ');
+
+                    SortedSet<string> wordsSet = new SortedSet<string>(words);
+
+                    dataset.Add(wordsSet);
+                }
+            }
+
+            // We will use Apriori to determine the frequent item sets of this database.
+            // To do this, we will say that an item set is frequent if it appears in at 
+            // least 3 transactions of the database: the value 3 is the support threshold.
+
+            // Create a new a-priori learning algorithm with support 3
+            Apriori<string> apriori = new Apriori<string>(threshold: 3, confidence: 0);
+
+            // Use the algorithm to learn a set matcher
+            AssociationRuleMatcher<string> classifier = apriori.Learn(dataset.ToArray());
+
+            // Use the classifier to find orders that are similar to 
+            // orders where clients have bought items 1 and 2 together:
+            string[][] matches = classifier.Decide(postWords);
+
+            totalPosts.ForEach(post => 
+            {
+                for (int i = 0; i < matches.Length; i++)
+                {
+                    bool add = true;
+
+                    for (int j = 0; j < matches[i].Length; j++)
+                    {
+                        if (!post.Content.Contains(matches[i][j]))
+                        {
+                            add = false;
+                        }
+                    }
+
+                    if (add && !recommendedPosts.Contains(post))
+                    {
+                        recommendedPosts.Add(post);
+                    }
+                }
+            });
+            
+            return recommendedPosts;
         }
     }
 }

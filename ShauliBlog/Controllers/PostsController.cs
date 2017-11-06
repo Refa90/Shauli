@@ -15,6 +15,8 @@ namespace ShauliBlog.Controllers
     {
         private ShauliBlogContext db = new ShauliBlogContext();
 
+        private Learning learning = new Learning();
+
         // GET: Posts
         public ActionResult Index()
         {
@@ -33,6 +35,14 @@ namespace ShauliBlog.Controllers
             {
                 return HttpNotFound();
             }
+
+            post.RecommendedPosts = learning.RecommendNew(post);
+
+            if (post.RecommendedPosts.Count < 3)
+            {
+                post.RecommendedPosts.AddRange(db.Posts.Take(3 - post.RecommendedPosts.Count).ToList());
+            }
+
             return View(post);
         }
 

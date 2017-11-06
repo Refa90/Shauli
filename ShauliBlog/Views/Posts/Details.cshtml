@@ -69,6 +69,23 @@
             </dd>
 
         </dl>
+
+        <br />
+
+        @if (Model.RecommendedPosts.Count > 0)
+        {
+            <h4>Recommended Posts</h4>
+            <hr />
+            <dl>
+                @foreach(var post in Model.RecommendedPosts)
+                {
+                    <dt>
+                        @Html.ActionLink(post.Headline, "Details", "Posts", new { id = post.Id }, null)
+                    </dt>
+                }
+            </dl>
+        }
+        
     </div>
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
