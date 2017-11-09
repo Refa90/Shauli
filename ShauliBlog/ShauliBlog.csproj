@@ -208,6 +208,7 @@
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\FansClubController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MapMarkersController.cs" />
     <Compile Include="Controllers\PostCommentsController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Filters\CustomActionFilter.cs" />
@@ -222,6 +223,7 @@
     <Compile Include="Models\CustomDropCreateDatabaseAlways.cs" />
     <Compile Include="Models\Essay.cs" />
     <Compile Include="Models\Fan.cs" />
+    <Compile Include="Models\MapMarker.cs" />
     <Compile Include="Models\IdentityConfiguration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Post.cs" />
@@ -256,6 +258,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="fonts\sansation_light.woff" />
+    <Content Include="Content\data.csv" />
+    <Content Include="Content\data2.csv" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\custom\post.js" />
@@ -307,6 +311,11 @@
     <Content Include="Views\Posts\JoinByPost.cshtml" />
     <Content Include="Views\Posts\JoinByAuthor.cshtml" />
     <Content Include="Views\Posts\GroupByWebpage.cshtml" />
+    <Content Include="Views\MapMarkers\Create.cshtml" />
+    <Content Include="Views\MapMarkers\Delete.cshtml" />
+    <Content Include="Views\MapMarkers\Details.cshtml" />
+    <Content Include="Views\MapMarkers\Edit.cshtml" />
+    <Content Include="Views\MapMarkers\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />

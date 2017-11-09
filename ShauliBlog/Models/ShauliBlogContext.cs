@@ -21,5 +21,7 @@ namespace ShauliBlog.Models
         public System.Data.Entity.DbSet<ShauliBlog.Models.Post> Posts { get; set; }
 
         public System.Data.Entity.DbSet<ShauliBlog.Models.Comment> Comments { get; set; }
+
+        public System.Data.Entity.DbSet<ShauliBlog.Models.MapMarker> MapMarkers { get; set; }
     }
 }
