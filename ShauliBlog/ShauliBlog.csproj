@@ -194,6 +194,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="fonts\sansation_light.woff" />
+    <Content Include="Content\data.csv" />
+    <Content Include="Content\data2.csv" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\custom\post.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
