@@ -7,5 +7,6 @@
         public const string VIDEO_PATH = BASE_MEDIA_PATH + "videos/";
 
         public const string ADMIN_ROLE = "admin";
+        public const string FAN_ROLE = "fan";
     }
 }

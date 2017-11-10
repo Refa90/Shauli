@@ -19,28 +19,38 @@ namespace ShauliBlog.Models
                 new UserStore<ApplicationUser>(context));
 
 
-            IdentityRole identityRole = new IdentityRole
+            IdentityRole adminRole = new IdentityRole
             {
                 Name = Consts.ADMIN_ROLE
             };
 
-            var idResult = _roleManager.Create(identityRole);
+            var idResult = _roleManager.Create(adminRole);
 
             if (idResult.Succeeded)
             {
-                string auth = Consts.ADMIN_ROLE + "@gmail.com";
-
-                var user = new ApplicationUser
+                IdentityRole fanRole = new IdentityRole
                 {
-                    UserName = auth,
-                    Email = auth
+                    Name = Consts.FAN_ROLE
                 };
 
-                var result = _userManager.Create(user, "Aa12345!");
+                idResult = _roleManager.Create(fanRole);
 
-                if (result.Succeeded)
+                if (idResult.Succeeded)
                 {
-                    _userManager.AddToRoleAsync(user.Id, Consts.ADMIN_ROLE).Wait();
+                    string auth = Consts.ADMIN_ROLE + "@gmail.com";
+
+                    var user = new ApplicationUser
+                    {
+                        UserName = auth,
+                        Email = auth
+                    };
+
+                    var result = _userManager.Create(user, "Aa12345!");
+
+                    if (result.Succeeded)
+                    {
+                        _userManager.AddToRoleAsync(user.Id, Consts.ADMIN_ROLE).Wait();
+                    }
                 }
             }
         }

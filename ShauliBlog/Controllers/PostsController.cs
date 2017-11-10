@@ -134,22 +134,12 @@ namespace ShauliBlog.Controllers
         public ActionResult GroupByWebpage()
         {
             
-            //var posts = from p in db.Posts select p;
             var comments = from c in db.Comments select c;
             var group = comments.GroupBy(a => a.AuthorWebsiteAddress).Select(c =>  new GroupByWebsite { AuthorWebsiteAddress = c.Key, count = c.Count() });
 
             return View(group);
             
-            /*var comments = from c in db.Comments select c;
-            var group = comments.GroupBy(a => a.AuthorWebsiteAddress);
 
-            if (comments == null)
-                return HttpNotFound();
-
-            List<Comment> CommentList = group.ToList<Comment>();
-
-            return View(CommentList);
-            */
         }
 
 

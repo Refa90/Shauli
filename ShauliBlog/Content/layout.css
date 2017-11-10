@@ -67,18 +67,18 @@ nav {
 		}
 		
 			nav ul li a {
-				display: block;
+				
 				margin-right: 20px;
 				width: 140px;
 				font-size: 14px;
 				line-height: 44px;
 				text-align: center;
 				text-decoration: none;
-				color: #777;
+				color: #ffffff;
 			}
 			
 				nav ul li a:hover {
-					color: #fff;
+					color: greenyellow;
 				}
 			
 			nav ul li.selected a {
@@ -221,6 +221,11 @@ aside {
     background: -moz-linear-gradient(left, rgba(255,255,255,0), #e3e3e3); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to left, rgba(255,255,255,0), #e3e3e3); /* Standard syntax (must be last) */
 }
+
+
+#questions {
+    text-shadow: 2px 2px black;
+} 
 
 
 

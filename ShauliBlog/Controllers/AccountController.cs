@@ -9,6 +9,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity.EntityFramework;
+using ShauliBlog.Utils;
 
 namespace ShauliBlog.Controllers
 {
@@ -161,6 +163,9 @@ namespace ShauliBlog.Controllers
                 if (result.Succeeded)
                 {
                     //identityManager.AddUserToRole(user.Id, "admin");
+
+
+                    UserManager.AddToRoleAsync(user.Id, Consts.FAN_ROLE).Wait();
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
