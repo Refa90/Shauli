@@ -152,7 +152,7 @@ nav {
 
 #content {
     display: table;
-    
+        
 }
 
 #search {
@@ -225,10 +225,16 @@ aside {
 
 #questions {
     text-shadow: 2px 2px black;
-} 
+}
 
 
+.image {
+    
+}
 
+.video {
+    
+}
 
 
 

@@ -118,12 +118,17 @@
                             <p>@Html.DisplayFor(model => item.Content)</p>
 
                         <input type="button" value="translate" class="translate"/>
-
-                            @Html.DisplayImageFor(model => item.Image)
-
-                            @Html.DisplayVideoFor(model => item.Video)
-                          
-                        </div>
+                            
+                                <div class="image">
+                                    @Html.DisplayImageFor(model => item.Image)
+                                </div>
+                            
+                                <br />
+                            
+                                <div class="video">
+                                    @Html.DisplayVideoFor(model => item.Video)
+                                </div>
+                            
                     </article>
                 </section>
 
