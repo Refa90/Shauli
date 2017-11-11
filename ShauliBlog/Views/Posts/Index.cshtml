@@ -64,7 +64,7 @@
         <div id="graphs">
             <div id="graph1">
                 <br />
-                <h4><u> Posts rate by day:</u></h4>
+                <h4><u> Posts rate:</u></h4>
                 <br />
 
                 <!-- load the d3.js library -->
@@ -82,8 +82,9 @@
                     var parseTime = d3.timeParse("%Y-%m-%d %H:%M:%S.0000000");
                     
             // set the ranges
-            var x = d3.scaleTime().range([0, width]);
-            var y = d3.scaleLinear().range([height, 0]);
+            //var x = d3.scaleTime().range([0, width]);
+                    var x = d3.scaleTime().range([0, width]);
+                    var y = d3.scaleLinear().range([height, 0]);
 
             // define the line
             var valueline = d3.line()
@@ -189,19 +190,44 @@
                     @*d3.csv("@Url.Content("~/Content/data2.csv")", function (d) {*@
                     //d3.json("Posts/GroupByDayForGraph", function (d) {
                     //d3.json("Posts/GroupByMonthForGraph", function (d) {
-                    d3.json("Posts/GroupByMonthForGraph", function (d) {
+                    //d3.json("GroupByMonthForGraph", function (d) {
 
 
 
-                        d.count = +d.count;
+                    //    d.count = +d.count;
                         
-                        console.log(d)
-                        return d;
+                    //    console.log(d)
+                    //    return d;
                         
-                    }, function (error, data) {
+                    //}, function (error, data) {
+                    //    if (error) throw error;
+
+                    //    var arc = g.selectAll(".arc")
+                    //        .data(pie(data))
+                    //        .enter().append("g")
+                    //        .attr("class", "arc");
+
+                    //    arc.append("path")
+                    //        .attr("d", path)
+                    //        .attr("fill", function (d) { return color(d.data.month); });
+
+                    //    arc.append("text")
+                    //        .attr("transform", function (d) { return "translate(" + label.centroid(d) + ")"; })
+                    //        .attr("dy", "0.35em")
+                    //        .text(function (d) { return d.data.month; });
+
+
+                        
+                    //});
+
+                    d3.json("Posts/GroupByMonthForGraph", function (error, data) {
                         if (error) throw error;
-
-                        var arc = g.selectAll(".arc")
+                        data.forEach(function (d) {
+                            d.count = +d.count;
+                            return d
+                        })
+                         
+                         var arc = g.selectAll(".arc")
                             .data(pie(data))
                             .enter().append("g")
                             .attr("class", "arc");
@@ -214,11 +240,7 @@
                             .attr("transform", function (d) { return "translate(" + label.centroid(d) + ")"; })
                             .attr("dy", "0.35em")
                             .text(function (d) { return d.data.month; });
-
-
-                        
                     });
-
                 </script>
 
             </div>

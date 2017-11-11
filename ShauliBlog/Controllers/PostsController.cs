@@ -181,8 +181,8 @@ namespace ShauliBlog.Controllers
         {
             var posts = from p in db.Posts select p;
             var group = posts
-                .GroupBy(date => System.Data.Entity.DbFunctions.TruncateTime(date.PublishDate))
-                .Select(p => new GroupByPublishMonth { month = p.Key.Value.Month.ToString(), count = p.Count().ToString() });
+                .GroupBy(date => System.Data.Entity.DbFunctions.TruncateTime(date.PublishDate).Value.Month)
+                .Select(p => new GroupByPublishMonth { month = p.Key.ToString(), count = p.Count().ToString() });
 
             return Json(group, JsonRequestBehavior.AllowGet);
         }
