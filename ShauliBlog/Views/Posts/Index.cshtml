@@ -57,18 +57,20 @@
     @Html.ActionLink("Join all Posts with Comments by PostID", "JoinByPost")<br />
     @Html.ActionLink("Join all Posts with Comments by Author", "JoinByAuthor")<br />
     @Html.ActionLink("Group by web page", "GroupByWebpage") <br /> <br />
+    @Html.ActionLink("Group by Publish Date", "GroupByDay") <br /> <br />
 
 
-    <div id="graphs">
-        <div id="graph1">
-            <br />
-            <h4><u> Posts by day:</u></h4>
-            <br />
 
-            <!-- load the d3.js library -->
-            <script src="https://d3js.org/d3.v4.min.js"></script>
+        <div id="graphs">
+            <div id="graph1">
+                <br />
+                <h4><u> Posts rate by day:</u></h4>
+                <br />
 
-            <script>
+                <!-- load the d3.js library -->
+                <script src="https://d3js.org/d3.v4.min.js"></script>
+
+                <script>
 
             // set the dimensions and margins of the graph
             var margin = {top: 20, right: 20, bottom: 30, left: 50},
@@ -76,15 +78,16 @@
                 height = 500 - margin.top - margin.bottom;
 
             // parse the date / time
-            var parseTime = d3.timeParse("%d-%b-%y");
-
+            //var parseTime = d3.timeParse("%d-%b-%y");
+                    var parseTime = d3.timeParse("%Y-%m-%d %H:%M:%S.0000000");
+                    
             // set the ranges
             var x = d3.scaleTime().range([0, width]);
             var y = d3.scaleLinear().range([height, 0]);
 
             // define the line
             var valueline = d3.line()
-                .x(function(d) { return x(d.date); })
+                .x(function (d) { return x(d.date); })
                 .y(function (d) { return y(d.close); });
 
             // append the svg obgect to the body of the page
@@ -98,20 +101,35 @@
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-            // Get the data
-            //d3.csv("./Content/data.csv", function (error, data)
-            d3.csv("@Url.Content("~/Content/data.csv")", function(error, data) {
-              if (error) throw error;
+                // Get the data
+            @*d3.csv("@Url.Content("~/Content/data.csv")", function(error, data) {*@
 
-              // format the data
-              data.forEach(function(d) {
-                  d.date = parseTime(d.date);
-                  d.close = +d.close;
-              });
+                    //var data = [
+                    //    { date: "1-May-12", close: "58.13" },
+                    //    { date: "30-Apr-12", close: "53.98" },
+                    //    { date: "27-Apr-12", close: "67.00" },
+                    //    { date: "26-Apr-12", close: "89.70" },
+                    //    { date: "25-Apr-12", close: "99.00" }
+                    //];
+
+                    //d3.json("GroupByDayForGraph", function(error, data) {
+                    //    if (error) throw error;
+
+                    d3.json("Posts/GroupByDayForGraph", function(error, data) {
+
+                        // format the data
+                        data.forEach(function(d) {
+                            //d.PostPublishDate = parseTime(d.PostPublishDate);
+                            // d.count = +d.count;
+                            d.date = parseTime(d.date);
+                            d.close = +d.close;
+
+                        });
+
 
               // Scale the range of the data
-              x.domain(d3.extent(data, function(d) { return d.date; }));
-                    y.domain([0, d3.max(data, function (d) { return d.close; })]);
+                        x.domain(d3.extent(data, function (d) { return d.date; }));
+                        y.domain([0, d3.max(data, function (d) { return d.close; })]);
 
               // Add the valueline path.
               svg.append("path")
@@ -130,27 +148,27 @@
 
             });
 
-            </script>
+                </script>
 
-        </div>
+            </div>
 
 
-        <div id="graph2">
-            <br />
-            <h4><u> Posts by month: </u></h4>
-            <br />
+            <div id="graph2">
+                <br />
+                <h4><u> Posts by month: </u></h4>
+                <br />
 
-            <script>
+                <script id="graph2">
 
                 var svg2 = d3.select("#graph2")
                     .append("svg")
                     .attr("width", 400)
                     .attr("height", 400).append("g"),
                     g = svg2.append("g").attr("transform", "translate(" + 400 / 2 + "," + 400 / 2 + ")");
-                
+
                 radius = (Math.min(400, 400) / 2);
 
-            
+
 
 
 
@@ -168,9 +186,18 @@
                         .outerRadius(radius - 40)
                         .innerRadius(radius - 40);
 
-                    d3.csv("@Url.Content("~/Content/data2.csv")", function (d) {
+                    @*d3.csv("@Url.Content("~/Content/data2.csv")", function (d) {*@
+                    //d3.json("Posts/GroupByDayForGraph", function (d) {
+                    //d3.json("Posts/GroupByMonthForGraph", function (d) {
+                    d3.json("Posts/GroupByMonthForGraph", function (d) {
+
+
+
                         d.count = +d.count;
+                        
+                        console.log(d)
                         return d;
+                        
                     }, function (error, data) {
                         if (error) throw error;
 
@@ -187,12 +214,15 @@
                             .attr("transform", function (d) { return "translate(" + label.centroid(d) + ")"; })
                             .attr("dy", "0.35em")
                             .text(function (d) { return d.data.month; });
+
+
+                        
                     });
 
-            </script>
+                </script>
 
-        </div>  
-    </div>
+            </div>
+        </div>
 
 
 

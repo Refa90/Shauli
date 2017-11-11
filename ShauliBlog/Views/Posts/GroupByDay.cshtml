@@ -1,0 +1,45 @@
+﻿@using ShauliBlog.Models;
+@using ShauliBlog.Controllers;
+
+@model IQueryable<PostsController.GroupByPublishDate>
+
+@{
+    ViewBag.Title = "GroupByDay";
+}
+<div id="mainContent">
+    <h2>Post Publish Date Count</h2>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Publish Date
+                    </th>
+                    <th>
+                        Count
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (PostsController.GroupByPublishDate item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => item.date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.close)
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <p>
+        @Html.ActionLink("Back to List", "Index", "Posts")
+
+    </p>
+</div>

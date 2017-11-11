@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using ShauliBlog.Models;
 using ShauliBlog.Utils;
 
+
 namespace ShauliBlog.Controllers
 {
     [Authorize(Roles = "admin")]
@@ -37,6 +38,18 @@ namespace ShauliBlog.Controllers
             public string AuthorWebsiteAddress { get; set; }
             public int count { get; set; }
         }
+        public class GroupByPublishDate
+        {
+            public String date { get; set; }
+            public String close { get; set; }
+        }
+
+        public class GroupByPublishMonth
+        {
+            public String month { get; set; }
+            public String count { get; set; }
+        }
+
 
         // GET: Posts
         public ActionResult Index(string searchString, bool HasVideo = false, bool HasPicture = false, bool HasComments = false)
@@ -141,6 +154,40 @@ namespace ShauliBlog.Controllers
             
 
         }
+
+
+        //public ActionResult GroupByDay()
+        //{
+        //    var posts = from p in db.Posts select p;
+        //    var group = posts
+        //        .GroupBy(date => System.Data.Entity.DbFunctions.TruncateTime(date.PublishDate))
+        //        .Select(p => new GroupByPublishDate { PostPublishDate = p.Key.ToString(), count = p.Count() });
+
+        //    ViewBag.PublishDates = group;
+        //    return View(group);
+        //}
+
+        public ActionResult GroupByDayForGraph()
+        {
+            var posts = from p in db.Posts select p;
+            var group = posts
+                .GroupBy(date => System.Data.Entity.DbFunctions.TruncateTime(date.PublishDate))
+                .Select(p => new GroupByPublishDate { date = p.Key.ToString(), close = p.Count().ToString()  });
+
+            return Json(group, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GroupByMonthForGraph()
+        {
+            var posts = from p in db.Posts select p;
+            var group = posts
+                .GroupBy(date => System.Data.Entity.DbFunctions.TruncateTime(date.PublishDate))
+                .Select(p => new GroupByPublishMonth { month = p.Key.Value.Month.ToString(), count = p.Count().ToString() });
+
+            return Json(group, JsonRequestBehavior.AllowGet);
+        }
+
+
 
 
         // GET: Posts/Create
