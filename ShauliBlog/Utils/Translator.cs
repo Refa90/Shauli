@@ -29,7 +29,10 @@ namespace ShauliBlog.Utils
             rawResult = rawResult.Substring(rawResult.IndexOf(">") + 1);
             rawResult = rawResult.Substring(0, rawResult.IndexOf("</span>"));
 
-            result = rawResult.Trim();
+            if (rawResult.Length < 1000) // limit translation result to 1000 characters
+                result = rawResult.Trim();
+            else
+                result = origPhrase;
 
             return result;
         }
