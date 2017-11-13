@@ -10,7 +10,7 @@ using ShauliBlog.Models;
 
 namespace ShauliBlog.Controllers
 {
-    [Authorize(Roles = "fan")]
+    [Authorize(Roles = "fan,admin")]
     public class FansClubController : Controller
     {
         private ShauliBlogContext db = new ShauliBlogContext();
